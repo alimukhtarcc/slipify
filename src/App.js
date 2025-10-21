@@ -100,7 +100,7 @@ function App() {
                 />
               </div>
             </div>
-            <Button label="Create Account" onclick={()=>alert("Hello")}/>    
+            <Button label="Create Account" onclick={()=>alert("Hello")} type='secondary'/>    
           </form>
         </div>
       </div>
