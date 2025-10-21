@@ -1,5 +1,6 @@
 import './App.css';
 import logo from './assets/logo.png';
+import Button from './components/Button';
 
 function App() {
   return (
@@ -99,8 +100,7 @@ function App() {
                 />
               </div>
             </div>
-
-            <button className='bg-primary-400 p-2 rounded-md text-white'>Create Account</button>
+            <Button label="Create Account" onclick={()=>alert("Hello")}/>    
           </form>
         </div>
       </div>
