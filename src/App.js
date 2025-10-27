@@ -1,14 +1,15 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import EmployeeSignup from './pages/EmployeeSignup';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import GenerateSlip from './pages/generateslip';
+import LoginPage from './pages/loginpage';
 
 function App() {
   console.log('App loaded - REACT_APP_API_BASE_URL:', process.env.REACT_APP_API_BASE_URL);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/employees/create" replace />} />
-        <Route path="/employees/create" element={<EmployeeSignup />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/generate-slip" element={<GenerateSlip />} />
       </Routes>
     </Router>
   );
