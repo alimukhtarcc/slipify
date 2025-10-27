@@ -52,10 +52,10 @@ function Login() {
       // In a real app, you would call an authentication API here
       // For now, simulate a successful login after a short delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Simulate successful login
       setSuccessMessage('Login successful! Redirecting...');
-      
+
       // Redirect to upload page after 1 second
       setTimeout(() => {
         navigate('/employees/upload');
@@ -112,12 +112,24 @@ function Login() {
             required
           />
 
-          <Button 
-            label={isLoading ? "Logging in..." : "Login"} 
-            onClick={handleSubmit} 
+          <Button
+            label={isLoading ? "Logging in..." : "Login"}
+            onClick={handleSubmit}
             type="secondary"
             disabled={isLoading}
-          />    
+          />
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <button
+                type="button"
+                onClick={() => navigate('/employees/create')}
+                className="text-blue-600 hover:text-blue-800 font-semibold"
+              >
+                Create one here
+              </button>
+            </p>
+          </div>
         </Form>
       </Card>
     </PageLayout>

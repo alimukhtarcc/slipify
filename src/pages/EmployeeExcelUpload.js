@@ -1,78 +1,67 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+
 import Button from '../components/Button';
 import PageLayout from '../components/layout/PageLayout';
 import Card from '../components/layout/Card';
 import Header from '../components/layout/Header';
 import Alert from '../components/ui/Alert';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { ALERT_TYPES } from '../domain/types';
 import { employeeService } from '../services';
+
+// ✅ Utility: Valid Excel extensions
+const VALID_EXTENSIONS = ['.xlsx', '.xls', '.csv'];
 
 function EmployeeExcelUpload() {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [alertType, setAlertType] = useState(ALERT_TYPES.INFO);
+  const [alert, setAlert] = useState({ message: '', type: ALERT_TYPES.INFO });
 
-  const clearMessages = () => {
-    setError('');
-    setSuccess('');
-  };
+  // ---- Helper Functions ----
+  const clearAlert = () => setAlert({ message: '', type: ALERT_TYPES.INFO });
 
-  const setErrorMessage = (message) => {
-    setError(message);
-    setSuccess('');
-    setAlertType(ALERT_TYPES.ERROR);
-  };
-
-  const setSuccessMessage = (message) => {
-    setSuccess(message);
-    setError('');
-    setAlertType(ALERT_TYPES.SUCCESS);
+  const showAlert = (message, type = ALERT_TYPES.INFO) => {
+    setAlert({ message, type });
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Check if file is an Excel file
-      const validExtensions = ['.xlsx', '.xls', '.csv'];
-      const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
-      
-      if (validExtensions.includes(fileExtension)) {
-        setSelectedFile(file);
-        clearMessages();
-      } else {
-        setErrorMessage('Please select a valid Excel file (.xlsx, .xls, or .csv)');
-        setSelectedFile(null);
-      }
+    if (!file) return;
+
+    const extension = '.' + file.name.split('.').pop().toLowerCase();
+    if (VALID_EXTENSIONS.includes(extension)) {
+      setSelectedFile(file);
+      clearAlert();
+    } else {
+      showAlert('❌ Please select a valid Excel file (.xlsx, .xls, or .csv)', ALERT_TYPES.ERROR);
+      setSelectedFile(null);
     }
   };
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      setErrorMessage('Please select a file to upload');
+      showAlert('⚠️ Please select a file to upload', ALERT_TYPES.ERROR);
       return;
     }
 
-    clearMessages();
+    clearAlert();
     setIsLoading(true);
 
     try {
       const result = await employeeService.uploadEmployees(selectedFile);
-      
+
       if (result.success) {
-        setSuccessMessage(result.message || 'File uploaded successfully!');
+        showAlert(result.message || '✅ File uploaded successfully!', ALERT_TYPES.SUCCESS);
         console.log('Upload response:', result.data);
-        // Optionally reset the file input after successful upload
         setSelectedFile(null);
       } else {
-        setErrorMessage(result.error || result.message || 'Failed to upload file');
+        showAlert(result.error || result.message || '❌ Failed to upload file', ALERT_TYPES.ERROR);
       }
     } catch (err) {
-      setErrorMessage(err.message || 'An error occurred while uploading the file');
+      showAlert(err.message || '❌ An error occurred during upload', ALERT_TYPES.ERROR);
       console.error('Upload error:', err);
     } finally {
       setIsLoading(false);
@@ -80,40 +69,40 @@ function EmployeeExcelUpload() {
   };
 
   const handleLogout = () => {
-    // In a real app, you would clear authentication state here
     navigate('/login');
   };
 
+  // ---- UI Render ----
   return (
     <PageLayout>
-      <Card className="w-4/5 max-w-3xl">
+      <Card className="w-4/5 max-w-3xl shadow-lg transition-all duration-300 hover:shadow-xl">
         <div className="flex justify-between items-center mb-6">
           <Header
             logo={logo}
-            title="Upload Employee Data"
-            subtitle="Slipify"
-            description="Upload Excel file with employee information"
-            additionalDescription="Select an Excel file (.xlsx, .xls, or .csv) to upload employee data"
+            title=" Upload Employee Data"
+            subtitle="Slipify HR Portal"
+            description="Easily upload and manage your employee records with one click."
+            additionalDescription="Select an Excel file (.xlsx, .xls, or .csv) to import employee information."
           />
           <button
             onClick={handleLogout}
-            className="text-red-600 hover:text-red-800 font-semibold"
+            className="text-red-600 hover:text-red-800 font-semibold transition-all"
           >
             Logout
           </button>
         </div>
 
         <div className="space-y-6">
-          {/* Error and Success Messages */}
-          {(error || success) && (
+          {/* Alerts */}
+          {alert.message && (
             <Alert
-              type={alertType}
-              message={error || success}
-              onClose={clearMessages}
+              type={alert.type}
+              message={alert.message}
+              onClose={clearAlert}
             />
           )}
 
-          {/* File Input */}
+          {/* File Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Select Excel File
@@ -123,7 +112,7 @@ function EmployeeExcelUpload() {
                 type="file"
                 accept=".xlsx,.xls,.csv"
                 onChange={handleFileChange}
-                className="block w-full text-sm text-gray-500
+                className="block w-full text-sm text-gray-700
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-lg file:border-0
                   file:text-sm file:font-semibold
@@ -134,30 +123,62 @@ function EmployeeExcelUpload() {
               />
             </div>
             {selectedFile && (
-              <p className="mt-2 text-sm text-green-600">
-                Selected file: {selectedFile.name}
+              <p className="mt-2 text-sm text-green-600 font-medium">
+                ✅ Selected: {selectedFile.name}
               </p>
             )}
           </div>
 
           {/* Upload Button */}
           <div className="flex gap-4">
-            <Button 
-              label={isLoading ? "Uploading..." : "Upload File"} 
-              onClick={handleUpload} 
+            <Button
+              label={
+                isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                    Uploading...
+                  </span>
+                ) : (
+                  'Upload File'
+                )
+              }
+              onClick={handleUpload}
               type="primary"
               disabled={isLoading || !selectedFile}
             />
           </div>
 
-          {/* File Format Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-900 mb-2">Expected Excel Format:</h3>
-            <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Columns: Employee ID, First Name, Last Name, Email, Department, Position</li>
-              <li>• First row should be headers</li>
-              <li>• Supported formats: .xlsx, .xls, .csv</li>
+          {/* Format Guide */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 transition-all hover:bg-blue-100">
+            <h3 className="font-semibold text-blue-900 mb-2">📘 Expected Excel Format:</h3>
+            <ul className="text-sm text-blue-800 space-y-1 list-disc ml-4">
+              <li>Employee ID</li>
+              <li>First Name</li>
+              <li>Last Name</li>
+              <li>Email</li>
+              <li>Department</li>
+              <li>Position</li>
             </ul>
+            <p className="mt-2 text-xs text-blue-700">• First row should contain headers.</p>
           </div>
         </div>
       </Card>
@@ -166,4 +187,3 @@ function EmployeeExcelUpload() {
 }
 
 export default EmployeeExcelUpload;
-
