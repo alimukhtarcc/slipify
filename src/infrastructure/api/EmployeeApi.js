@@ -23,8 +23,10 @@ class EmployeeApi {
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
-        body: formData,
-        // Don't set Content-Type header, browser will set it with boundary for multipart/form-data
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ file: formData }),
       });
 
       const contentType = response.headers.get('content-type');
