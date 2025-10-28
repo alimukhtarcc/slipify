@@ -171,12 +171,11 @@ function EmployeeExcelUpload() {
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 transition-all hover:bg-blue-100">
             <h3 className="font-semibold text-blue-900 mb-2">📘 Expected Excel Format:</h3>
             <ul className="text-sm text-blue-800 space-y-1 list-disc ml-4">
-              <li>Employee ID</li>
-              <li>First Name</li>
-              <li>Last Name</li>
-              <li>Email</li>
-              <li>Department</li>
-              <li>Position</li>
+              <li>employeeId</li>
+              <li>employeeName</li>
+              <li>designation</li>
+              <li>accountNumber</li>
+              <li>salary</li>
             </ul>
             <p className="mt-2 text-xs text-blue-700">• First row should contain headers.</p>
           </div>
