@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png"; // adjust path if needed
+import logo from '../../assets/logo.png';
+ // adjust path if needed
 
 const DashboardLayout = ({ children }) => {
   return (

@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import EmployeeSignup from './pages/EmployeeSignup';
-import LoginPage from './pages/LoginPage';      // Make sure you have this file
-import GenerateSlip from './pages/GenerateSlip'; // Make sure you have this file
+import LoginPage from './pages/loginpage';      // Make sure you have this file
+import GenerateSlip from './pages/generateslip'; // Make sure you have this file
 
 function App() {
     console.log('App loaded - REACT_APP_API_BASE_URL:', process.env.REACT_APP_API_BASE_URL);

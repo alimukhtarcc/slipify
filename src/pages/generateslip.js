@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api';
-import Button from '../components/ui/Button';
+import Button from '../components/ui/button';
 import DashboardLayout from '../components/layout/DashboardLayout';
 
 function GenerateSlip() {
