@@ -1,7 +1,7 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import GenerateSlip from './pages/generateslip';
-import LoginPage from './pages/loginpage';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import GenerateSlip from "./pages/generateslip";
+import LoginPage from "./pages/loginpage";
 
 function App() {
   return (
