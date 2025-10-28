@@ -49,7 +49,8 @@
 export const API_ENDPOINTS = {
   USER_CREATE: '/user/create',
   USER_LOGIN: '/user/login',
-  EMPLOYEE_UPLOAD: '/api/employees/upload'
+  EMPLOYEE_UPLOAD: '/api/employees/upload',
+  generate_salary: '/api/generate_salary'
 };
 
 export const FORM_FIELDS = {

@@ -16,7 +16,7 @@ class EmployeeApi {
     formData.append('file', file);
 
     const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
-    const apiUrl = `${baseUrl}${API_ENDPOINTS.EMPLOYEE_UPLOAD}`;
+    const apiUrl = `${baseUrl}${API_ENDPOINTS.generate_salary}`;
 
     console.log('Uploading file to:', apiUrl);
 
