@@ -59,7 +59,7 @@ function LoginPage() {
                   id="firstName"
                   name="firstName"
                   type="text"
-                  placeholder="Hassan"
+                  placeholder="Kashmala"
                   className="w-full bg-neutral-100 rounded-md block min-w-0 grow p-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                 />
               </div>
@@ -72,7 +72,7 @@ function LoginPage() {
                   id="lastName"
                   name="lastName"
                   type="text"
-                  placeholder="Abdullah"
+                  placeholder="Khan"
                   className="w-full bg-neutral-100 rounded-md block min-w-0 grow p-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                 />
               </div>
