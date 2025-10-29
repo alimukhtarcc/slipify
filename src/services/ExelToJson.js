@@ -73,7 +73,9 @@ class ExelToJson {
             role: 'designation',
             jobtitle: 'designation',
             job_title: 'designation',
-
+            
+            emailId: 'emailId',
+            
             accountnumber: 'accountNumber',
             account_no: 'accountNumber',
             account_no_: 'accountNumber',
@@ -93,6 +95,7 @@ class ExelToJson {
                     employeeId: '',
                     employeeName: '',
                     designation: '',
+                    emailId: '',
                     accountNumber: '',
                     salary: 0
                 };

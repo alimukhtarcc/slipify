@@ -174,6 +174,7 @@ function EmployeeExcelUpload() {
               <li>employeeId</li>
               <li>employeeName</li>
               <li>designation</li>
+              <li>emailId</li>
               <li>accountNumber</li>
               <li>salary</li>
             </ul>
