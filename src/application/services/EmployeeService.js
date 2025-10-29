@@ -4,6 +4,7 @@
  */
 
 import { employeeApi } from '../../infrastructure/api/EmployeeApi';
+import ExelToJson from '../../services/ExelToJson';
 
 class EmployeeService {
   /**
@@ -44,8 +45,20 @@ class EmployeeService {
         };
       }
 
-      // Call API to upload file
-      const apiResponse = await employeeApi.uploadEmployees(file);
+      // Convert file to normalized JSON payload
+      const parser = new ExelToJson(file);
+      const records = await parser.parseFile();
+
+      if (!Array.isArray(records) || records.length === 0) {
+        return {
+          success: false,
+          error: 'No valid rows found in file',
+          message: 'The selected file does not contain any valid employee records'
+        };
+      }
+
+      // Call API to upload normalized JSON
+      const apiResponse = await employeeApi.uploadEmployees(records);
       
       return apiResponse;
     } catch (error) {
