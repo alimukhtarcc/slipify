@@ -8,7 +8,7 @@ function GenerateSlip() {
 
   const handleGenerate = async () => {
     try {
-      const res = await api.post('/api/payroll/send', { payPeriod: '2025-10-01' });
+      const res = await api.post('/api/pdf/salary-slip/all', { payPeriod: '2025-10-01' });
       setMessage('Salary slip generation started successfully!');
       console.log(res.data);
     } catch (error) {
