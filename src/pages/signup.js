@@ -2,7 +2,7 @@ import Button from '../components/Button';
 import logo from '../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 
-function LoginPage() {
+function SignUp() {
   const navigate = useNavigate();
 
   const handleCreateAccount = () => {
@@ -115,4 +115,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignUp;
