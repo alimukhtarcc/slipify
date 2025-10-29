@@ -65,9 +65,9 @@ class ExelToJson {
             id: 'employeeId',
             employee_id: 'employeeId',
 
-            employeename: 'employeeName',
-            name: 'employeeName',
-            employee_name: 'employeeName',
+            employeename: 'Name',
+            name: 'Name',
+            employee_name: 'Name',
 
             designation: 'designation',
             role: 'designation',
@@ -75,6 +75,7 @@ class ExelToJson {
             job_title: 'designation',
             
             emailId: 'emailId',
+            emailid: 'emailId',
             
             accountnumber: 'accountNumber',
             account_no: 'accountNumber',
@@ -93,11 +94,11 @@ class ExelToJson {
             .map((row) => {
                 const record = {
                     employeeId: '',
-                    employeeName: '',
+                    Name: '',
                     designation: '',
-                    emailId: '',
                     accountNumber: '',
-                    salary: 0
+                    salary: 0,
+                    emailId: ''
                 };
 
                 for (const rawKey of Object.keys(row)) {
@@ -113,11 +114,11 @@ class ExelToJson {
                         }
                     }
                 }
-
                 return record;
             })
-            .filter((r) => r.employeeId || r.employeeName || r.accountNumber);
-
+            .filter((r) => r.employeeId || r.Name || r.accountNumber || r.emailId );
+            
+        console.log(normalized)
         return normalized;
     }
 }

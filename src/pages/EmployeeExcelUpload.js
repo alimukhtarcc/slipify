@@ -172,7 +172,7 @@ function EmployeeExcelUpload() {
             <h3 className="font-semibold text-blue-900 mb-2">📘 Expected Excel Format:</h3>
             <ul className="text-sm text-blue-800 space-y-1 list-disc ml-4">
               <li>employeeId</li>
-              <li>employeeName</li>
+              <li>Name</li>
               <li>designation</li>
               <li>emailId</li>
               <li>accountNumber</li>
