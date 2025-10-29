@@ -47,7 +47,7 @@
  */
 
 export const API_ENDPOINTS = {
-  USER_CREATE: '/user/create'
+  USER_CREATE: '/api/user/create'
 };
 
 export const FORM_FIELDS = {
