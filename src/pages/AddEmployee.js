@@ -22,11 +22,11 @@ function AddEmployee() {
     getFieldError,
     clearMessages,
   } = useUserForm({
+    [FORM_FIELDS.NAME]: "",
     [FORM_FIELDS.EMAIL]: "",
-    [FORM_FIELDS.FIRST_NAME]: "",
-    [FORM_FIELDS.LAST_NAME]: "",
-    [FORM_FIELDS.PASSWORD]: "",
-    [FORM_FIELDS.CONFIRM_PASSWORD]: "",
+    [FORM_FIELDS.SALARY]: "",
+    [FORM_FIELDS.DESIGNATION]: "",
+    [FORM_FIELDS.ACCOUNT_NUMBER]: "",
   });
   return (
     <PageLayout>
@@ -49,34 +49,19 @@ function AddEmployee() {
             />
           )}
 
-          {/* name */}
-          <div className="flex gap-6">
-            <FormField
-              id={FORM_FIELDS.FIRST_NAME}
-              name={FORM_FIELDS.FIRST_NAME}
-              type="text"
-              value={values[FORM_FIELDS.FIRST_NAME]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Hassan"
-              label="First Name"
-              required
-              error={getFieldError(FORM_FIELDS.FIRST_NAME)}
-            />
-
-            <FormField
-              id={FORM_FIELDS.LAST_NAME}
-              name={FORM_FIELDS.LAST_NAME}
-              type="text"
-              value={values[FORM_FIELDS.LAST_NAME]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Abdullah"
-              label="Last Name"
-              required
-              error={getFieldError(FORM_FIELDS.LAST_NAME)}
-            />
-          </div>
+          {/* Name */}
+          <FormField
+            id={FORM_FIELDS.NAME}
+            name={FORM_FIELDS.NAME}
+            type="name"
+            value={values[FORM_FIELDS.NAME]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Sania Arooj"
+            label="Name"
+            required
+            error={getFieldError(FORM_FIELDS.NAME)}
+          />
 
           {/* Email */}
           <FormField
@@ -94,43 +79,43 @@ function AddEmployee() {
           {/* Salary fields */}
           <div className="flex gap-6">
             <FormField
-              id={FORM_FIELDS.PASSWORD}
-              name={FORM_FIELDS.PASSWORD}
-              type="password"
-              value={values[FORM_FIELDS.PASSWORD]}
+              id={FORM_FIELDS.SALARY}
+              name={FORM_FIELDS.SALARY}
+              type="number"
+              value={values[FORM_FIELDS.SALARY]}
               onChange={handleChange}
               onBlur={handleBlur}
               label="Salary"
               required
-              error={getFieldError(FORM_FIELDS.PASSWORD)}
+              error={getFieldError(FORM_FIELDS.SALARY)}
             />
 
             {/*Designation fields */}
             <FormField
-              id={FORM_FIELDS.CONFIRM_PASSWORD}
-              name={FORM_FIELDS.CONFIRM_PASSWORD}
-              type="password"
-              value={values[FORM_FIELDS.CONFIRM_PASSWORD]}
+              id={FORM_FIELDS.DESIGNATION}
+              name={FORM_FIELDS.DESIGNATION}
+              type="text"
+              value={values[FORM_FIELDS.DESIGNATION]}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="*********"
+              
               label="Designation"
               required
-              error={getFieldError(FORM_FIELDS.CONFIRM_PASSWORD)}
+              error={getFieldError(FORM_FIELDS.DESIGNATION)}
             />
 
             {/*Account Number fields */}
             <FormField
-              id={FORM_FIELDS.CONFIRM_PASSWORD}
-              name={FORM_FIELDS.CONFIRM_PASSWORD}
-              type="password"
-              value={values[FORM_FIELDS.CONFIRM_PASSWORD]}
+              id={FORM_FIELDS.ACCOUNT_NUMBER}
+              name={FORM_FIELDS.ACCOUNT_NUMBER}
+              type="number"
+              value={values[FORM_FIELDS.ACCOUNT_NUMBER]}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="*********"
+
               label="Account Number"
               required
-              error={getFieldError(FORM_FIELDS.CONFIRM_PASSWORD)}
+              error={getFieldError(FORM_FIELDS.ACCOUNT_NUMBER)}
             />
           </div>
 
