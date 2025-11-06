@@ -98,7 +98,6 @@ function AddEmployee() {
               value={values[FORM_FIELDS.DESIGNATION]}
               onChange={handleChange}
               onBlur={handleBlur}
-              
               label="Designation"
               required
               error={getFieldError(FORM_FIELDS.DESIGNATION)}
@@ -120,7 +119,7 @@ function AddEmployee() {
           </div>
 
           <Button
-            label={isLoading ? "Creating Account..." : "Create Account"}
+            label={isLoading ? "Creating Account..." : "Create Employee"}
             onClick={handleSubmit}
             type="secondary"
             disabled={isLoading}
